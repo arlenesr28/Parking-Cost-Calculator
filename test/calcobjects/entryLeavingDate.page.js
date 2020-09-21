@@ -4,7 +4,6 @@ class entryLeavingDate extends Page {
     entryDate (entryDate, currentDate) {
         entryDate.click()
         browser.pause(1000)
-
         const StartDateScript = "javascript:document.getElementById('StartingDate').value='" + currentDate + "';;window.close();"
         browser.execute(StartDateScript)
         browser.pause(2000)
@@ -26,7 +25,6 @@ class entryLeavingDate extends Page {
     leavingDate (leavingDate, futureDate) {
         leavingDate.click()
         browser.pause(1000)
-
         const leavingDateScript = "javascript:document.getElementById('LeavingDate').value='" + futureDate + "';;window.close();"
         browser.execute(leavingDateScript)
         browser.pause(2000)
