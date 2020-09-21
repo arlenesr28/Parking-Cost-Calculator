@@ -20,38 +20,98 @@ describe('Parking Cost Calculator', () => {
         parkingCostPage.openPage()
     })
 
-    it('Choose a Parking Lot', () => {
-        let parkingLotButtonList = $$('#ParkingLot')
-        parkingLotButtonList.forEach(element => {
-            element.click()
-            const list = $('//*[@id="ParkingLot"]/option[3]')
-            browser.pause(1000)
-            list.click()
-            browser.pause(2000)
-        });
-        browser.pause(5000)
-    })
-
-    it('Entry Date and Time', () => {
+    it('Choose a Parking Lot: Valet Parking', () => {
+        parkinglotList.clickParkingLotDropdown()
+        parkinglotList.valetParkingOption().click()
+        browser.pause(2000)
         const entryDate = $('/html/body/form/table/tbody/tr[2]/td[2]/a')
         chooseEntryDate.entryDate(entryDate,currentDate)
         const startingTimeText = $('#StartingTime')
         chooseStartingTime.startingTime(startingTimeText, hour)
         AmPm.choose_ampm_entry(AM_PM);  
-    })
-
-    it('Leaving Date and Time', () => {
         const leavingDate = $('/html/body/form/table/tbody/tr[3]/td[2]/a')
         chooseLeavingDate.leavingDate(leavingDate, futureDate)
         const leavingTimeText = $('#LeavingTime') 
         chooseLeavingTime.leavingTime(leavingTimeText, hour)
         AmPm.choose_ampm_leaving(AM_PM);
+        const calculateButton = $('/html/body/form/input[2]')
+        calculateButton.click()
+        browser.pause(3000)
     })
 
-    it('Calculate Button', () => {
+    it('Choose a Parking Lot: Short Term Parking', () => {
+        parkinglotList.clickParkingLotDropdown()
+        parkinglotList.shortTermOption().click()
+        browser.pause(2000)
+        const entryDate = $('/html/body/form/table/tbody/tr[2]/td[2]/a')
+        chooseEntryDate.entryDate(entryDate,currentDate)
+        const startingTimeText = $('#StartingTime')
+        chooseStartingTime.startingTime(startingTimeText, hour)
+        AmPm.choose_ampm_entry(AM_PM);  
+        const leavingDate = $('/html/body/form/table/tbody/tr[3]/td[2]/a')
+        chooseLeavingDate.leavingDate(leavingDate, futureDate)
+        const leavingTimeText = $('#LeavingTime') 
+        chooseLeavingTime.leavingTime(leavingTimeText, hour)
+        AmPm.choose_ampm_leaving(AM_PM);
         const calculateButton = $('/html/body/form/input[2]')
-        browser.pause(1000)
         calculateButton.click()
-        browser.pause(5000)
+        browser.pause(3000)
+    })
+
+    it('Choose a Parking Lot: Economy Parking', () => {
+        parkinglotList.clickParkingLotDropdown()
+        parkinglotList.economyOption().click()
+        browser.pause(2000)
+        const entryDate = $('/html/body/form/table/tbody/tr[2]/td[2]/a')
+        chooseEntryDate.entryDate(entryDate,currentDate)
+        const startingTimeText = $('#StartingTime')
+        chooseStartingTime.startingTime(startingTimeText, hour)
+        AmPm.choose_ampm_entry(AM_PM);  
+        const leavingDate = $('/html/body/form/table/tbody/tr[3]/td[2]/a')
+        chooseLeavingDate.leavingDate(leavingDate, futureDate)
+        const leavingTimeText = $('#LeavingTime') 
+        chooseLeavingTime.leavingTime(leavingTimeText, hour)
+        AmPm.choose_ampm_leaving(AM_PM);
+        const calculateButton = $('/html/body/form/input[2]')
+        calculateButton.click()
+        browser.pause(3000)
+    })
+
+    it('Choose a Parking Lot: Long Term Garage Parking', () => {
+        parkinglotList.clickParkingLotDropdown()
+        parkinglotList.longTermGarageOption().click()
+        browser.pause(2000)
+        const entryDate = $('/html/body/form/table/tbody/tr[2]/td[2]/a')
+        chooseEntryDate.entryDate(entryDate,currentDate)
+        const startingTimeText = $('#StartingTime')
+        chooseStartingTime.startingTime(startingTimeText, hour)
+        AmPm.choose_ampm_entry(AM_PM);  
+        const leavingDate = $('/html/body/form/table/tbody/tr[3]/td[2]/a')
+        chooseLeavingDate.leavingDate(leavingDate, futureDate)
+        const leavingTimeText = $('#LeavingTime') 
+        chooseLeavingTime.leavingTime(leavingTimeText, hour)
+        AmPm.choose_ampm_leaving(AM_PM);
+        const calculateButton = $('/html/body/form/input[2]')
+        calculateButton.click()
+        browser.pause(3000)
+    })
+
+    it('Choose a Parking Lot Long: Term Surface Parking', () => {
+        parkinglotList.clickParkingLotDropdown()
+        parkinglotList.longTermSurfaceOption().click()
+        browser.pause(2000)
+        const entryDate = $('/html/body/form/table/tbody/tr[2]/td[2]/a')
+        chooseEntryDate.entryDate(entryDate,currentDate)
+        const startingTimeText = $('#StartingTime')
+        chooseStartingTime.startingTime(startingTimeText, hour)
+        AmPm.choose_ampm_entry(AM_PM);  
+        const leavingDate = $('/html/body/form/table/tbody/tr[3]/td[2]/a')
+        chooseLeavingDate.leavingDate(leavingDate, futureDate)
+        const leavingTimeText = $('#LeavingTime') 
+        chooseLeavingTime.leavingTime(leavingTimeText, hour)
+        AmPm.choose_ampm_leaving(AM_PM);
+        const calculateButton = $('/html/body/form/input[2]')
+        calculateButton.click()
+        browser.pause(3000)
     })
 })
