@@ -17,5 +17,6 @@ module.exports = class AMPM {
         } else {
             $('/html/body/form/table/tbody/tr[3]/td[2]/input[4]').click()
         }
+        return am_pm
     }
 }

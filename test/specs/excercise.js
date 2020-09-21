@@ -6,6 +6,11 @@ const hour = currentHour.split(" ")[0];
 const AM_PM = currentHour.split(" ")[1];
 
 const parkingCostPage = require('../calcobjects/parking.page')
+const parkinglotList = require('../calcobjects/parkingLotList.page')
+const chooseEntryDate = require('../calcobjects/entryLeavingDate.page')
+const chooseStartingTime = require('../calcobjects/entryLeavingDate.page')
+const chooseLeavingDate = require('../calcobjects/entryLeavingDate.page')
+const chooseLeavingTime = require('../calcobjects/entryLeavingDate.page')
 
 const choose_ampm = require('../calcobjects/ampm');
 const AmPm = new choose_ampm;
@@ -16,61 +21,30 @@ describe('Parking Cost Calculator', () => {
     })
 
     it('Choose a Parking Lot', () => {
-        const parkingLotButtonList = $$('#ParkingLot')
+        let parkingLotButtonList = $$('#ParkingLot')
         parkingLotButtonList.forEach(element => {
             element.click()
-            element.click()
-            browser.pause(1000)       
+            const list = $('//*[@id="ParkingLot"]/option[3]')
+            browser.pause(1000)
+            list.click()
+            browser.pause(2000)
         });
-        browser.pause(1000)
+        browser.pause(5000)
     })
 
     it('Entry Date and Time', () => {
         const entryDate = $('/html/body/form/table/tbody/tr[2]/td[2]/a')
-        entryDate.click()
-        browser.pause(2000)
-        
-        const StartDateScript = "javascript:document.getElementById('StartingDate').value='" + currentDate + "';;window.close();"
-        browser.execute(StartDateScript)
-        browser.pause(2000)
-        browser.switchWindow('Pick a Date')
-        browser.pause(1000)
-        browser.closeWindow()
-        browser.pause(1000)
-        browser.switchWindow('Parking Cost Calculator')
-        browser.pause(1000) 
-
-        const StartingTimeText = $('#StartingTime')
-        StartingTimeText.click()
-        StartingTimeText.clearValue()
-        browser.pause(2000)
-        StartingTimeText.setValue(hour)
-        browser.pause(2000)
-        
+        chooseEntryDate.entryDate(entryDate,currentDate)
+        const startingTimeText = $('#StartingTime')
+        chooseStartingTime.startingTime(startingTimeText, hour)
         AmPm.choose_ampm_entry(AM_PM);  
     })
 
     it('Leaving Date and Time', () => {
         const leavingDate = $('/html/body/form/table/tbody/tr[3]/td[2]/a')
-        leavingDate.click()
-        browser.pause(1000)
-
-        const leavingDateScript = "javascript:document.getElementById('LeavingDate').value='" + futureDate + "';;window.close();"
-        browser.execute(leavingDateScript)
-        browser.pause(3000)
-        browser.switchWindow('Pick a Date')
-        browser.pause(1000)
-        browser.closeWindow()
-        browser.switchWindow('Parking Cost Calculator')
-        browser.pause(1000)
-
+        chooseLeavingDate.leavingDate(leavingDate, futureDate)
         const leavingTimeText = $('#LeavingTime') 
-        leavingTimeText.click()
-        leavingTimeText.clearValue()
-        browser.pause(2000)
-        leavingTimeText.setValue(hour)
-        browser.pause(1000)
-
+        chooseLeavingTime.leavingTime(leavingTimeText, hour)
         AmPm.choose_ampm_leaving(AM_PM);
     })
 
